@@ -5,14 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.google.common.base.Predicates.equalTo;
+import java.util.List;
 
-public class Activity6 {
+public class Activity9 {
     WebDriver driver = new FirefoxDriver();
     Actions action = new Actions(driver);
     @BeforeClass()
@@ -24,15 +23,15 @@ public class Activity6 {
         driver.findElement(By.id("btnLogin")).click();
     }
     @Test
-    public void menuOption(){
-        WebElement directory = driver.findElement(By.id("menu_directory_viewDirectory"));
-        directory.isDisplayed();
-        if (directory.isEnabled()){
-            directory.click();
-            directory.click();
+    public void emergencyContacts(){
+        driver.findElement(By.id("menu_pim_viewMyDetails")).click();
+        driver.findElement(By.id("menu_pim_viewMyDetails")).click();
+        driver.findElement(By.xpath("//a[@href='/orangehrm/symfony/web/index.php/pim/viewEmergencyContacts/empNumber/1']")).click();
+        List<WebElement> emgcontacts = driver.findElements(By.xpath("/html/body/div[1]/div[3]/div/div[3]/div[2]/form/table/tbody/tr"));
+        System.out.println("Details of all the emergency contacts: ");
+        for(WebElement cell : emgcontacts) {
+            System.out.println(cell.getText());
         }
-        String headerName = driver.findElement(By.tagName("h1")).getText();
-        Assert.assertEquals(headerName,"Search Directory");
     }
     @AfterClass
     public void tearDown(){

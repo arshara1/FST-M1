@@ -5,14 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.google.common.base.Predicates.equalTo;
-
-public class Activity6 {
+public class Activity7 {
     WebDriver driver = new FirefoxDriver();
     Actions action = new Actions(driver);
     @BeforeClass()
@@ -24,15 +21,18 @@ public class Activity6 {
         driver.findElement(By.id("btnLogin")).click();
     }
     @Test
-    public void menuOption(){
-        WebElement directory = driver.findElement(By.id("menu_directory_viewDirectory"));
-        directory.isDisplayed();
-        if (directory.isEnabled()){
-            directory.click();
-            directory.click();
-        }
-        String headerName = driver.findElement(By.tagName("h1")).getText();
-        Assert.assertEquals(headerName,"Search Directory");
+    public void addQualification(){
+        driver.findElement(By.id("menu_pim_viewMyDetails")).click();
+        driver.findElement(By.id("menu_pim_viewMyDetails")).click();
+        driver.findElement(By.xpath("//a[@href='/orangehrm/symfony/web/index.php/pim/viewQualifications/empNumber/1']")).click();
+        driver.findElement(By.id("addWorkExperience")).click();
+        WebElement companyName = driver.findElement(By.id("experience_employer"));
+        WebElement jobTitle = driver.findElement(By.id("experience_jobtitle"));
+        companyName.clear();
+        jobTitle.clear();
+        companyName.sendKeys("IBM");
+        jobTitle.sendKeys("Tester");
+        driver.findElement(By.id("btnWorkExpSave")).click();
     }
     @AfterClass
     public void tearDown(){
