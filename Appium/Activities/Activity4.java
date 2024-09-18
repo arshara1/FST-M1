@@ -67,7 +67,7 @@ public class Activity4 {
 
         // Assertion
         String contactName = driver.findElement(AppiumBy.id("com.google.android.contacts:id/large_title")).getText();
-        Assert.assertEquals(contactName, "Padmini");
+        Assert.assertEquals(contactName, "Arshiya");
     }
 
     // Tear down method
